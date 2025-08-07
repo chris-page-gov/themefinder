@@ -43,6 +43,12 @@ sudo apt-get install -y \
 echo "🔄 Converting Poetry configuration to UV..."
 cd /workspaces/themefinder
 
+# Copy UV configuration if it exists, otherwise use existing pyproject.toml
+if [ -f "pyproject.uv.toml" ]; then
+    echo "📋 Using UV-specific configuration..."
+    cp pyproject.uv.toml pyproject.toml
+fi
+
 # Install Python dependencies using UV
 echo "📚 Installing Python dependencies with UV..."
 uv sync --dev
@@ -108,6 +114,8 @@ LANGFUSE_PUBLIC_KEY=your_langfuse_public_key_here
 LANGFUSE_HOST=https://your-langfuse-instance.com
 EOF
     echo "📋 Created .env template. Please update with your actual credentials."
+else
+    echo "📋 .env file already exists. Please ensure it contains your API keys."
 fi
 
 echo "✅ ThemeFinder development environment setup complete!"
