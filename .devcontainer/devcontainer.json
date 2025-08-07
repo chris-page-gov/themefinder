@@ -80,10 +80,6 @@
   "remoteUser": "vscode",
   "containerUser": "vscode",
 
-  "mounts": [
-    "source=${localWorkspaceFolder}/.env,target=/workspaces/themefinder/.env,type=bind,consistency=cached"
-  ],
-
   "forwardPorts": [8000, 8080, 8888],
   "portsAttributes": {
     "8000": {
