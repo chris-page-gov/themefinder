@@ -51,7 +51,7 @@ fi
 
 # Install Python dependencies using UV
 echo "📚 Installing Python dependencies with UV..."
-uv sync --dev
+uv sync --all-extras
 
 # Install pre-commit hooks if .pre-commit-config.yaml exists
 if [ -f ".pre-commit-config.yaml" ]; then
