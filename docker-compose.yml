@@ -1,0 +1,75 @@
+version: '3.8'
+
+services:
+  themefinder-dev-uv:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: development-uv
+    container_name: themefinder-dev-uv
+    volumes:
+      - .:/app
+      - uv-cache:/app/.uv
+      - jupyter-data:/home/appuser/.jupyter
+    ports:
+      - "8888:8888"  # Jupyter Lab
+      - "8000:8000"  # MkDocs or other web server
+    environment:
+      - PYTHONPATH=/app/src
+    env_file:
+      - .env
+    stdin_open: true
+    tty: true
+    command: /bin/bash
+
+  themefinder-dev-poetry:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: development-poetry
+    container_name: themefinder-dev-poetry
+    volumes:
+      - .:/app
+      - poetry-cache:/app/.venv
+      - jupyter-data:/home/appuser/.jupyter
+    ports:
+      - "8889:8888"  # Jupyter Lab (different port to avoid conflicts)
+      - "8001:8000"  # MkDocs or other web server
+    environment:
+      - PYTHONPATH=/app/src
+    env_file:
+      - .env
+    stdin_open: true
+    tty: true
+    command: /bin/bash
+
+  themefinder-prod:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: production
+    container_name: themefinder-prod
+    ports:
+      - "8002:8000"
+    environment:
+      - PYTHONPATH=/app/src
+    env_file:
+      - .env
+
+  docs:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: development-uv
+    container_name: themefinder-docs
+    volumes:
+      - .:/app
+      - uv-cache:/app/.uv
+    ports:
+      - "8003:8000"
+    command: uv run mkdocs serve --dev-addr=0.0.0.0:8000
+
+volumes:
+  uv-cache:
+  poetry-cache:
+  jupyter-data:
