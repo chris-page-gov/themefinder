@@ -32,10 +32,12 @@ dev: install ## Set up development environment
 	$(PKG_MANAGER) pre-commit install
 
 test: ## Run tests
-	$(PKG_MANAGER) pytest
+	# Always invoke pytest via the project interpreter to avoid picking up system pytest
+	$(PKG_MANAGER) python -m pytest
 
 test-cov: ## Run tests with coverage
-	$(PKG_MANAGER) pytest --cov=src/themefinder --cov-report=html --cov-report=term-missing
+	# Use module invocation to ensure the correct interpreter/environment
+	$(PKG_MANAGER) python -m pytest --cov=src/themefinder --cov-report=html --cov-report=term-missing
 
 lint: ## Run linting
 	$(PKG_MANAGER) ruff check src/ tests/ evals/

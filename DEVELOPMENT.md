@@ -61,12 +61,12 @@ The easiest way to get started with ThemeFinder development is using VS Code Dev
 #### DevContainer Aliases
 The DevContainer provides convenient aliases:
 ```bash
-tf-test      # Run tests
-tf-test-cov  # Run tests with coverage
+tf-test      # Run tests (uses Makefile -> uv python -m pytest)
+tf-test-cov  # Run tests with coverage (Makefile)
 tf-lint      # Check code quality
 tf-format    # Format code
-tf-docs      # Start documentation server
-tf-eval      # Run evaluations
+tf-docs      # Start documentation server (Makefile)
+tf-eval      # Run evaluations (Makefile)
 tf-notebook  # Start Jupyter Lab
 tf-shell     # Start Python shell
 ```

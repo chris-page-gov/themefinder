@@ -68,12 +68,12 @@ echo "⚙️ Setting up aliases..."
 cat >> ~/.bashrc << 'EOF'
 
 # ThemeFinder Development Aliases
-alias tf-test="uv run pytest"
-alias tf-test-cov="uv run pytest --cov=src/themefinder --cov-report=html --cov-report=term-missing"
+alias tf-test="make test"
+alias tf-test-cov="make test-cov"
 alias tf-lint="uv run ruff check src/ tests/ evals/"
 alias tf-format="uv run ruff format src/ tests/ evals/"
-alias tf-docs="uv run mkdocs serve"
-alias tf-eval="uv run make run_evals"
+alias tf-docs="make docs"
+alias tf-eval="make run_evals"
 alias tf-shell="uv run python"
 alias tf-notebook="uv run jupyter lab --ip=0.0.0.0 --port=8888 --no-browser --allow-root"
 
